@@ -26,7 +26,8 @@ Implemented features are listed here : [features](./etcs/feature.md)
 
 You need dependencies below.
 
-- python3
+- ~~python3~~
+- **python2.7**
 - tensorflow 1.4.1+
 - opencv3, protobuf, python3-tk
 - slidingwindow
@@ -44,6 +45,18 @@ $ export LLVM_CONFIG=/usr/bin/llvm-config-7
 
 Clone the repo and install 3rd-party libraries.
 
+> **for supporting python2, you need follow step before install requirements.txt**
+```bash
+//llvmlite latest py2 version is 0.32.0
+$ python -m pip install llvmlite==0.32.0
+//slim support
+$ python -m pip install tf_slim
+//numba suport
+$ python -m pip install numba --no-deps
+//matplotlib support (IDK why pip matplotlib always load GTK, use apt instead pip to fix this issue)
+$ sudo apt-get install python-matplotlib
+```
+
 ```bash
 $ git clone https://www.github.com/ildoonet/tf-pose-estimation
 $ cd tf-pose-estimation
@@ -53,7 +66,8 @@ $ pip3 install -r requirements.txt
 Build c++ library for post processing. See : https://github.com/ildoonet/tf-pose-estimation/tree/master/tf_pose/pafprocess
 ```
 $ cd tf_pose/pafprocess
-$ swig -python -c++ pafprocess.i && python3 setup.py build_ext --inplace
+$ ~~swig -python -c++ pafprocess.i && python3 setup.py build_ext --inplace~~
+$ swig -python -c++ pafprocess.i && python setup.py build_ext --inplace
 ```
 
 ### Package Install
