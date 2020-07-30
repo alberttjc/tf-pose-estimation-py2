@@ -17,7 +17,7 @@ Original Repo(Caffe) : https://github.com/CMU-Perceptual-Computing-Lab/openpose
 |:---------|:--------------------|:----------------|
 | ![cmu-model](/etcs/openpose_macbook_cmu.gif)     | ![mb-model-macbook](/etcs/openpose_macbook_mobilenet3.gif) | ![mb-model-tx2](/etcs/openpose_tx2_mobilenet3.gif) |
 | **~0.6 FPS** | **~4.2 FPS** @ 368x368 | **~10 FPS** @ 368x368 |
-| 2.8GHz Quad-core i7 | 2.8GHz Quad-core i7 | Jetson TX2 Embedded Board | 
+| 2.8GHz Quad-core i7 | 2.8GHz Quad-core i7 | Jetson TX2 Embedded Board |
 
 Implemented features are listed here : [features](./etcs/feature.md)
 
@@ -45,7 +45,7 @@ You need dependencies below.
 
 ```bash
 $ sudo apt-get install libllvm-7-ocaml-dev libllvm7 llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime
-$ export LLVM_CONFIG=/usr/bin/llvm-config-7 
+$ export LLVM_CONFIG=/usr/bin/llvm-config-7
 ```
 
 ### 2. Installing 3rd-party Libraries
@@ -123,6 +123,14 @@ $ python run_webcam.py --model=mobilenet_thin --resize=432x368 --camera=0
 ```
 
 Then you will see the realtime webcam screen with estimated poses as below. This [Realtime Result](./etcs/openpose_macbook13_mobilenet2.gif) was recored on macbook pro 13" with 3.1Ghz Dual-Core CPU.
+
+### Video
+
+You can test the inference feature with the video ./etcs/dance.mp4
+
+```
+$ python run_video.py --model=mobilenet_thin --resolution=432x368 --video=./etcs/dance.mp4
+```
 
 ## Python Usage
 
