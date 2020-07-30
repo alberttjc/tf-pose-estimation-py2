@@ -64,4 +64,4 @@ setuptools.setup(
     py_modules=[
         "pafprocess"
     ],
-    zip_safe=False)
+)
