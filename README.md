@@ -1,3 +1,10 @@
+
+# Important
+This repo is modified to implement Python 2.7 and Tensorflow 1.14 for the purposes of integrating it in ROS Melodic
+
+Original repo utilised Python 3 which is not compatible with ROS (Python 2.7)
+Source : https://github.com/ildoonet/tf-pose-estimation
+
 # tf-pose-estimation
 
 'Openpose', human pose estimation algorithm, have been implemented using Tensorflow. It also provides several variants that have some changes to the network structure for **real-time processing on the CPU or low-power embedded devices.**
@@ -28,22 +35,20 @@ You need dependencies below.
 
 - ~~python3~~
 - **python2.7**
-- tensorflow 1.4.1+
+- tensorflow 1.14
 - opencv3, protobuf, python3-tk
 - slidingwindow
   - https://github.com/adamrehn/slidingwindow
   - I copied from the above git repo to modify few things.
 
-### Pre-Install Jetson case
+### 1. Pre-Install Jetson case
 
 ```bash
 $ sudo apt-get install libllvm-7-ocaml-dev libllvm7 llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime
 $ export LLVM_CONFIG=/usr/bin/llvm-config-7 
 ```
 
-### Install
-
-Clone the repo and install 3rd-party libraries.
+### 2. Installing 3rd-party Libraries
 
 > **for supporting python2, you need follow step before install requirements.txt**
 ```bash
@@ -56,33 +61,25 @@ $ python -m pip install numba --no-deps
 //matplotlib support (IDK why pip matplotlib always load GTK, use apt instead pip to fix this issue)
 $ sudo apt-get install python-matplotlib
 ```
+### 3. Clone repo and install requirements
 
 ```bash
-$ git clone https://www.github.com/ildoonet/tf-pose-estimation
+$ git clone https://github.com/alberttjc/tf-pose-estimation-py2.git
 $ cd tf-pose-estimation
-$ pip3 install -r requirements.txt
+$ pip install -r requirements.txt
 ```
+### 4. Build c++ Library for Post Processing
 
-Build c++ library for post processing. See : https://github.com/ildoonet/tf-pose-estimation/tree/master/tf_pose/pafprocess
 ```
+$ sudo apt install swig
 $ cd tf_pose/pafprocess
-$ ~~swig -python -c++ pafprocess.i && python3 setup.py build_ext --inplace~~
 $ swig -python -c++ pafprocess.i && python setup.py build_ext --inplace
 ```
-
-### Package Install
-
-Alternatively, you can install this repo as a shared package using pip.
-
-```bash
-$ git clone https://www.github.com/ildoonet/tf-pose-estimation
-$ cd tf-pose-estimation
-$ python setup.py install  # Or, `pip install -e .`
-```
+Details : https://github.com/ildoonet/tf-pose-estimation/tree/master/tf_pose/pafprocess
 
 ## Models & Performances
 
-See [experiments.md](./etc/experiments.md)
+See [experiments.md](./etcs/experiments.md)
 
 ### Download Tensorflow Graph File(pb file)
 
@@ -123,12 +120,6 @@ Then you will see the screen as below with pafmap, heatmap, result and etc.
 
 ```
 $ python run_webcam.py --model=mobilenet_thin --resize=432x368 --camera=0
-```
-
-Apply TensoRT 
-
-```
-$ python run_webcam.py --model=mobilenet_thin --resize=432x368 --camera=0 --tensorrt=True
 ```
 
 Then you will see the realtime webcam screen with estimated poses as below. This [Realtime Result](./etcs/openpose_macbook13_mobilenet2.gif) was recored on macbook pro 13" with 3.1Ghz Dual-Core CPU.
