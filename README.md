@@ -77,6 +77,14 @@ $ swig -python -c++ pafprocess.i && python setup.py build_ext --inplace
 ```
 Details : https://github.com/ildoonet/tf-pose-estimation/tree/master/tf_pose/pafprocess
 
+### 5. Package Install
+Install this repo as a shared package using pip.
+```
+$ cd tf-pose-estimation-py2
+$ python setup.py install
+$ pip install -e .
+```
+
 ## Models & Performances
 
 See [experiments.md](./etcs/experiments.md)
